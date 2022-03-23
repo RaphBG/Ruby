@@ -1,7 +1,7 @@
 def cypher(str, nbr)
     arr = str.codepoints
     for i in 0..arr.length-1
-      if arr[i].between?(65,90)
+      if Uppercase_letter(arr[i])
         
         if arr[i] + nbr > 90
           rest = (arr[i] + nbr)-91
@@ -26,4 +26,8 @@ def cypher(str, nbr)
       end
     end
     puts arr.join("")
+end
+
+def Uppercase_letter(letter)
+  letter.between?(65,90)
 end
