@@ -48,25 +48,21 @@ class Game
   end
 
   def position_impossible(index)
-    if(index.between?(0,9) == false)
-      while index.between?(0,9) == false
-        puts "This position doesn't exist"
-        index = gets.to_i
-      end  
-    end
+    while index.between?(0,9) == false
+      puts "This position doesn't exist"
+      index = gets.to_i
+    end  
     return index
   end
 
   def already_used(index)
-    if(@@used.include?(index))
-      while @@used.include?(index) || index.between?(0,9) == false
-        if(index.between?(0,9) == false)
-          puts "This position doesn't exist"
-        else
-          puts "This position has already been played"
-        end
-        index = gets.to_i
+    while @@used.include?(index) || index.between?(0,9) == false
+      if(index.between?(0,9) == false)
+        puts "This position doesn't exist"
+      else
+        puts "This position has already been played"
       end
+      index = gets.to_i
     end
     return index
   end
