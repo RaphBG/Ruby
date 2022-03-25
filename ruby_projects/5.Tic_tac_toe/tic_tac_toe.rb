@@ -8,8 +8,23 @@ class Game
       puts boardrow
     end
   end
+
+  def choice(index)
+
+    @@board.each_with_index do |data, index_r|
+      data.each_with_index do |position, index_c|
+        if position == index
+          @@board[index_r][index_c] = "x"
+          board
+        end
+      end
+    end
+    
+  end
   
 end
 
 game = Game.new
 game.board
+index = gets.to_i
+game.choice(index)
