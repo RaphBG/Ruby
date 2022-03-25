@@ -30,10 +30,7 @@ class MasterMind
       puts "Use numbers"
       redo_code
     end
-    win = win?(player_code)
-    if win == true
-        exit
-    end
+    win?(player_code)
   end
   
   def redo_code
@@ -44,7 +41,7 @@ class MasterMind
   def win?(player_code)
     if player_code == @@secret
       puts "WIN"
-      return true
+      exit
     end
   end
   
