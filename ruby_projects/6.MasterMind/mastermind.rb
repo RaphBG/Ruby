@@ -6,19 +6,39 @@ class MasterMind
     code
     turn = 1
     while turn <= 12
-      puts"Turn #{turn}"
+      puts "Turn #{turn}"
       player_code = gets.chomp
-      win = choice(player_code)
-      if win == true
-        return
-      end
+      choice(player_code)
       turn += 1
     end
     puts "Sorry, you failed"
   end
 
   def choice(player_code)
-    return win?(player_code)
+    problem = false
+    while player_code.length != 4
+      puts "Code is too short or too long"
+      player_code = gets.chomp
+    end
+    code_array = player_code.codepoints
+    code_array.each do |number|
+      if number.between?(48,57) != true
+        problem = true
+      end
+    end
+    if problem == true
+      puts "Use numbers"
+      redo_code
+    end
+    win = win?(player_code)
+    if win == true
+        exit
+    end
+  end
+  
+  def redo_code
+    player_code = gets.chomp
+    choice(player_code)
   end
 
   def win?(player_code)
@@ -37,10 +57,9 @@ class MasterMind
       @@used.push(number)
       @@secret += number.to_s
     end
-    puts "Voici le code"
+    print "Debug : Here is the code "
     puts @@secret
   end
-  
 end
 
 game = MasterMind.new
