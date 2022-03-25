@@ -70,8 +70,6 @@ class MasterMind
       @@used.push(number.to_s)
       @@secret += number.to_s
     end
-    print "Debug : Here is the code "
-    puts @@secret
   end
 end
 
