@@ -31,6 +31,7 @@ class MasterMind
       redo_code
     end
     win?(player_code)
+    hint(player_code)
   end
   
   def redo_code
@@ -44,6 +45,21 @@ class MasterMind
       exit
     end
   end
+
+  def hint(player_code)
+    arr = player_code.split("")
+    partial=0
+    match=0
+    arr.each_with_index do | data, index |
+      if @@used[index] == data
+        match+=1
+      elsif @@used.include?(data)
+        partial+=1
+      end
+    end
+    puts "match: #{match}"
+    puts "partial: #{partial}"
+  end
   
   def code
     4.times do
@@ -51,7 +67,7 @@ class MasterMind
       while @@used.include?(number)
         number = rand(0..9)
       end  
-      @@used.push(number)
+      @@used.push(number.to_s)
       @@secret += number.to_s
     end
     print "Debug : Here is the code "
