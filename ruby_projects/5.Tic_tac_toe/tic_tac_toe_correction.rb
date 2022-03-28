@@ -45,6 +45,7 @@ class Game
     while input == "" || @used.include?(input) || input.between?(1, 9) == false
       input = gets.chomp
 
+      # Ne pas avoir d'erreur quand l'utilisteur rentre une donnée vide
       if input == ""
         puts "Invalid value"
         next
