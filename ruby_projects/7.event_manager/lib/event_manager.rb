@@ -58,6 +58,7 @@ file_size = CSV.read('../event_attendees.csv').length
 template_letter = File.read "../form_letter.erb"
 erb_template = ERB.new template_letter
 hours = Array.new(file_size)
+days = Array.new(file_size)
 
 file.each_with_index do |row, index|
   
@@ -70,9 +71,11 @@ file.each_with_index do |row, index|
   puts "#{name} #{reg_date} #{phone_number}"
   date = DateTime.strptime(reg_date,"%m/%d/%y %H:%M")
   hours[index] = date.hour
+  days[index] = date.wday
 
   form_letter = erb_template.result(binding)
   save_thank_you_letter(id,form_letter)
 end
 
 puts "Peak registration hour is #{peak(hours)}."
+puts "Peak registration day is #{Date::DAYNAMES[peak(days)]}."
