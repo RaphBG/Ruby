@@ -16,7 +16,7 @@ class Game
   def play
     turn = 1
 
-    while !player1_win? && !player2_win? && turn <= 9
+    while !player_win?(1) && !player_win?(2) && turn <= 9
       display_board
       puts "Turn ##{turn}"
       puts "Player #{turn.odd? ? 1 : 2} turn!"
@@ -30,9 +30,9 @@ class Game
       turn += 1
     end
 
-    if player1_win?
+    if player_win?(1)
       puts "Player 1 wins!"
-    elsif player2_win?
+    elsif player_win?(2)
       puts "Player 2 wins!"
     else
       puts "No one win !"
@@ -79,21 +79,31 @@ class Game
     end
   end
 
-  def player1_win?
-    @win.each do |data|
-      if (data - @player1).empty?
-        return true
-      end
-    end
-    false
-  end
+  # def player1_win?
+  #   @win.each do |data|
+  #     if (data - @player1).empty?
+  #       return true
+  #     end
+  #   end
+  #   false
+  # end
 
-  def player2_win?
+  # def player2_win?
+  #   @win.each do |data|
+  #     if (data - @player2).empty?
+  #       return true
+  #     end
+  #   end
+  #   false
+  # end
+
+  def player_win?(player_number)
     @win.each do |data|
-      if (data - @player2).empty?
+      if (data - instance_variable_get("@player#{player_number}")).empty?
         return true
       end
     end
+
     false
   end
 end
