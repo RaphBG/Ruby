@@ -10,7 +10,11 @@ class Hangman
         else
             initialize
         end
-
+        @hidden = Array.new(@secret_word.length)
+        @hidden.each_with_index do |data, index|
+            @hidden[index]="_"
+        end
+        puts @hidden.join(" ")
     end
     
 end
