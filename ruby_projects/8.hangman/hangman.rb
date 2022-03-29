@@ -1,6 +1,7 @@
 class Hangman
     
     def initialize
+        @miss = []
         words = File.readlines('words.txt')
         number = rand(0..9894)
 
@@ -14,9 +15,25 @@ class Hangman
         @hidden.each_with_index do |data, index|
             @hidden[index]="_"
         end
-        puts @hidden.join(" ")
+    end
+
+    def game
+        puts "Guess: #{@hidden.join(' ')}"
+        puts "Miss: #{@miss.join(',')}"
+        choice
+    end
+
+    def choice 
+        puts "Write a downcase letter"
+        player_choice=gets.chomp
+        while player_choice.ord.between?(97,122) != false && player_choice.length != 1
+            puts "Write a downcase letter"
+            player_choice = gets.chomp
+        end
+        puts player_choice
     end
     
 end
 
 game = Hangman.new
+game.game
