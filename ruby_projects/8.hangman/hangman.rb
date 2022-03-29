@@ -1,17 +1,19 @@
 class Hangman
     
     def initialize
-        @try = 10
+        @secret_word = ""
         @miss = []
+        @try = 10
         words = File.readlines('words.txt')
         number = rand(0..9894)
 
         if words[number].chomp.length.between?(5,12)
             @secret_word = words[number].chomp
             puts @secret_word
-        else
+        elsif !words[number].chomp.length.between?(5,12)
             initialize
         end
+
         @hidden = Array.new(@secret_word.length)
         @hidden.each_with_index do |data, index|
             @hidden[index]="_"
@@ -19,12 +21,17 @@ class Hangman
     end
 
     def game
-        while @try != 0
+        while @try !=0 && !win?
             puts "Guess: #{@hidden.join(' ')}"
             puts "Miss: #{@miss.join(',')}"
             choice
         end
-        choice
+        puts "The word was #{@secret_word}."
+        if win?
+            puts "Good Job !"
+        else
+            puts "You failed"
+        end
     end
 
     def choice 
@@ -48,6 +55,10 @@ class Hangman
             @miss.push(player_choice)
             @try-=1
         end
+    end
+
+    def win?
+        @hidden.join('') == @secret_word
     end
     
 end
