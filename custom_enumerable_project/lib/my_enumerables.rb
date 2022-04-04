@@ -30,6 +30,13 @@ module Enumerable
     true
   end
 
+  def my_count
+    return length if !block_given?
+    count=0
+    my_each{|element| count+=1 if yield element }
+    count
+  end
+
 end
 
 # You will first have to define my_each
