@@ -20,6 +20,11 @@ module Enumerable
     true
   end
 
+  def my_any?
+    my_each{|element| return true if yield element}
+    false
+  end
+
 end
 
 # You will first have to define my_each
