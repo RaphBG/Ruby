@@ -5,9 +5,16 @@ module Enumerable
     index = 0
     for element in self do
       yield element, index
-      index+=1
+      index += 1
     end
   end
+
+  def my_select
+    result = []
+    my_each{|element| result.push(element) if yield element}
+    result
+  end
+
 end
 
 # You will first have to define my_each
