@@ -5,6 +5,7 @@ class Hangman
     def initialize
         @try = 10
         @miss = []
+        @used = []
         words = File.readlines('words.txt')
         number = rand(0..9894)
 
@@ -23,10 +24,19 @@ class Hangman
     def game(game)
         game = game
         while @try !=0 && !win?
-            save(game)
             puts "Guess: #{@hidden.join(' ')}"
             puts "Miss: #{@miss.join(',')}"
+            saving = 0
             choice
+            puts "Guess: #{@hidden.join(' ')}"
+            puts "Miss: #{@miss.join(',')}"
+            puts "Do you want to save(1) or continue(2) ?"
+            while !saving.between?(1,2)
+                saving = gets.to_i
+            end
+            if saving == 1
+                save(game)
+            end
         end
         puts "The word was #{@secret_word} !"
         if win?
@@ -39,11 +49,16 @@ class Hangman
 
     def choice 
         puts "Write a downcase letter"
-        player_choice=gets.chomp
-        while !player_choice.ord.between?(97,122) && player_choice.length != 1
-            puts "Write a downcase letter"
+        player_choice = gets.chomp.to_s
+        while !player_choice.ord.between?(97,122) || player_choice.length != 1 || @used.include?(player_choice)
+            if @used.include?(player_choice)
+                puts "Write a downcase letter that's never been used"
+            else
+                puts "Please, write a downcase letter"
+            end
             player_choice = gets.chomp
         end
+        @used.push(player_choice)
         in?(player_choice)
     end
 
@@ -86,6 +101,17 @@ class Hangman
 
 end
 
+
 game = Hangman.new
-game = game.load
-game.game(game)
+puts "Choose between load a game(1) or play(2)"
+choice = 0
+while !choice.between?(1,2)
+    choice = gets.to_i
+end
+
+if choice == 1
+    game = game.load
+    game.game(game)
+else
+    game.game(game)
+end
