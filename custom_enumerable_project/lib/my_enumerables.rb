@@ -15,6 +15,11 @@ module Enumerable
     result
   end
 
+  def my_all?
+    my_each{|element| return false unless yield element}
+    true
+  end
+
 end
 
 # You will first have to define my_each
