@@ -8,4 +8,12 @@ describe CaesarCypher do
         end
     end
 
+    describe "#cypherUppercase" do
+      subject(:cypher) { CaesarCypher.new("HELLO",1) }
+      it "HELLO is cyphered+1" do
+        cypher.arr = [72,69,76,76,79]
+        expect(cypher.cypherUppercase).to eq([73,70,77,77,80])
+      end
+    end
+
 end
