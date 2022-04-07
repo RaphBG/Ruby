@@ -6,6 +6,14 @@ class CaesarCypher
         @nbr = nbr
     end
 
+    def cypher
+        char2ascii
+        cypherUppercase
+        cypherDowncase
+        ascii2char
+        @arr.join('')
+    end
+
     def char2ascii
         @arr = @str.codepoints
     end

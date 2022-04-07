@@ -43,4 +43,11 @@ describe CaesarCypher do
       end
     end
 
+    describe "#cypher" do
+      subject(:cypher) { CaesarCypher.new("Hello !", 1) }
+      it "Hello ! is cyphered +1" do
+        expect(cypher.cypher).to eq("Ifmmp !")
+      end
+    end
+
 end
