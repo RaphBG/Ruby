@@ -1,7 +1,10 @@
 class Game
-  attr_accessor :board
+  attr_accessor :board, :red, :yellow, :turn
   def initialize
     @board = Array.new(6) { Array.new(7) { "\u25cb" } }
+    @yellow = "\e[1;33m\u25cf\e[0m"
+    @red = "\e[31m\u25cf\e[0m"
+    @turn = 1
   end
   
   def display
@@ -14,7 +17,7 @@ class Game
 
   def placing(column)
     index = empty_row?(column)
-    @board[index][column] = "X"
+    @board[index][column] = @turn.odd? ? @red : @yellow
   end
 
   def empty_row?(column)
@@ -35,6 +38,19 @@ class Game
       full += 1 if data.none?("\u25cb")
     end
     full == 6 ? true : false
+  end
+
+  def full_column?(column)
+    if @board[0][column] != "\u25cb"
+      puts "Choose an other columns !"
+      sleep 1
+      play
+    end
+  end
+
+  def check_row(row, column, symbol)
+    return if column > 3
+    @board[row][column]==symbol && @board[row][column+1]==symbol && @board[row][column+2]==symbol && @board[row][column+3]==symbol
   end
   
 end
