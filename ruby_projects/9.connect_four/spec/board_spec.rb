@@ -19,7 +19,7 @@ describe Game do
             expect(game.empty_row?(0)).to eq(4)
         end
 
-        it "3 is returned when a red and yellow tokens are placed" do
+        it "3 is returned when two tokens are placed" do
             game.board[5][0]="X"
             game.board[4][0]="X"
             expect(game.empty_row?(0)).to eq(3)
@@ -37,6 +37,17 @@ describe Game do
             game.placing(0)
             game.placing(0)
             expect(game.board[4][0]).to eq("X")
+        end
+    end
+
+    describe "#full?" do
+        subject(:game) { Game.new }
+        it "return true"do
+            game.board = Array.new(6) { Array.new(7) { "X" } }
+            expect(game.full?).to eq true
+        end
+        it "return false"do
+            expect(game.full?).to eq false
         end
     end
 end

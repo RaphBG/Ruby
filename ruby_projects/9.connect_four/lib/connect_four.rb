@@ -1,5 +1,5 @@
 class Game
-  attr_reader :board, :yellow, :red
+  attr_accessor :board, :yellow, :red
   def initialize
     @board = Array.new(6) { Array.new(7) { "\u25cb" } }
     @turn = 1
@@ -29,7 +29,20 @@ class Game
     end
     index
   end
+
+  def full?
+    full = 0
+    @board.map do |data|
+      if data.none?("\u25cb")
+        full +=1
+      end
+    end
+    if full == 6 
+      return true
+    end
+    return false
+  end
   
 end
 
-game = Game.new
+# game = Game.new
