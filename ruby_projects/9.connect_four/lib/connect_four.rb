@@ -28,5 +28,13 @@ class Game
     end
     index
   end
+
+  def full?
+    full = 0
+    @board.map do |data|
+      full += 1 if data.none?("\u25cb")
+    end
+    full == 6 ? true : false
+  end
   
 end
