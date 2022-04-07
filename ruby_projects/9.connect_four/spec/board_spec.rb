@@ -47,8 +47,81 @@ describe Game do
             game.board = Array.new(6) { Array.new(7) { game.red } }
             expect(game.full?).to eq true
         end
+
         it "return false"do
             expect(game.full?).to eq false
         end
     end
+
+    describe '#rows' do
+        subject(:game) { Game.new }
+
+        before do
+            game.board[2][3] = game.red
+            game.board[2][2] = game.red
+            game.board[2][1] = game.red
+            game.board[2][0] = game.red
+        end
+
+        context 'when it matches' do
+            it 'returns true' do
+                result = game.rows(2, 0, game.red)
+                expect(result).to be true
+            end
+        end
+    end
+
+    describe '#columns' do
+        subject(:game) { Game.new }
+
+        before do
+            game.board[5][0] = game.red
+            game.board[4][0] = game.red
+            game.board[3][0] = game.red
+            game.board[2][0] = game.red
+        end
+
+        context 'when it matches' do
+            it 'returns true' do
+                result = game.columns(2, 0, game.red)
+                expect(result).to be true
+            end
+        end
+    end
+
+    describe '#diagonal_right' do
+        subject(:game) { Game.new }
+
+        before do
+            game.board[2][6] = game.red
+            game.board[3][5] = game.red
+            game.board[4][4] = game.red
+            game.board[5][3] = game.red
+        end
+
+        context 'when it matches' do
+            it 'returns true' do
+                result = game.diagonal_right(2, 6, game.red)
+                expect(result).to be true
+            end
+        end
+    end
+
+    describe '#diagonal_left' do
+        subject(:game) { Game.new }
+        before do
+            game.board[0][2] = game.red
+            game.board[1][3] = game.red
+            game.board[2][4] = game.red
+            game.board[3][5] = game.red
+        end
+
+        context 'when it matches' do
+            it 'returns true' do
+                result = game.diagonal_left(0, 2, game.red)
+                expect(result).to be true
+            end
+        end
+    end
+
 end
