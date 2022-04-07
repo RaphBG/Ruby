@@ -11,12 +11,12 @@ describe CaesarCypher do
     describe "#cypherUppercase" do
       subject(:cypher) { CaesarCypher.new("HELLO",1) }
       it "HELLO is cyphered +1" do
-        cypher.arr = [72,69,76,76,79]
+        cypher.arr = [72,69,76,76,79] #equal to use char2asccii method
         expect(cypher.cypherUppercase).to eq([73,70,77,77,80])
       end
 
       it "Hello is cyphered +1" do
-        cypher.arr = [72,101,108,108,111]
+        cypher.arr = [72,101,108,108,111] #equal to use char2asccii method
         expect(cypher.cypherUppercase).to eq([73,101,108,108,111])
       end
 
@@ -25,8 +25,13 @@ describe CaesarCypher do
     describe "#cypherDowncase" do
       subject(:cypher) { CaesarCypher.new("HEllO",1) }
       it "HEllO is cyphered +1" do
-        cypher.arr = [72,69,108,108,79]
+        cypher.arr = [72,69,108,108,79] #equal to use char2asccii method
         expect(cypher.cypherDowncase).to eq([72,69,109,109,79])
+      end
+
+      it "Hello is cyphered +1" do
+        cypher.arr = [72,101,108,108,111] #equal to use char2asccii method
+        expect(cypher.cypherDowncase).to eq([72,102,109,109,112])
       end
     end
 
