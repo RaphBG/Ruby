@@ -70,4 +70,22 @@ describe Game do
         end
     end
 
+    describe '#check_columns' do
+        subject(:game) { Game.new }
+
+        before do
+            game.board[5][0] = game.red
+            game.board[4][0] = game.red
+            game.board[3][0] = game.red
+            game.board[2][0] = game.red
+        end
+
+        context 'when it matches' do
+            it 'returns true' do
+                result = game.check_column(2, 0, game.red)
+                expect(result).to be true
+            end
+        end
+    end
+
 end

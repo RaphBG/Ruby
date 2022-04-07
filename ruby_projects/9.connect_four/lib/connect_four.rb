@@ -52,5 +52,10 @@ class Game
     return if column > 3
     @board[row][column]==symbol && @board[row][column+1]==symbol && @board[row][column+2]==symbol && @board[row][column+3]==symbol
   end
+
+  def check_column(row, column, symbol)
+    return if row > 2
+    @board[row][column]==symbol && @board[row+1][column]==symbol && @board[row+2][column]==symbol && @board[row+3][column]==symbol
+  end
   
 end
