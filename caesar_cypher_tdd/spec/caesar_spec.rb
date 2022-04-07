@@ -22,4 +22,12 @@ describe CaesarCypher do
 
     end
 
+    describe "#cypherDowncase" do
+      subject(:cypher) { CaesarCypher.new("HEllO",1) }
+      it "HEllO is cyphered +1" do
+        cypher.arr = [72,69,108,108,79]
+        expect(cypher.cypherDowncase).to eq([72,69,109,109,79])
+      end
+    end
+
 end

@@ -23,4 +23,17 @@ class CaesarCypher
         end
     end
 
+    def cypherDowncase
+        @arr.each_with_index do |letter,index| 
+            if letter.between?(97,122)
+                if @arr[index] + @nbr > 122
+                    rest = (@arr[index] + @nbr)-123
+                    @arr[index] = (97 + rest)
+                  else
+                    @arr[index] = (@arr[index] + @nbr)
+                  end
+            end
+        end
+    end
+
 end
