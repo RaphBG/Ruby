@@ -57,5 +57,10 @@ class Game
     return if row > 2
     @board[row][column]==symbol && @board[row+1][column]==symbol && @board[row+2][column]==symbol && @board[row+3][column]==symbol
   end
+
+  def check_diagonal_right(row, column, symbol)
+    return if column < 3
+    @board[row][column] == symbol && @board[row + 1][column - 1] == symbol && @board[row + 2][column - 2] == symbol && @board[row + 3][column - 3] == symbol
+  end
   
 end

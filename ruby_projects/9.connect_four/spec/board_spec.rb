@@ -88,4 +88,22 @@ describe Game do
         end
     end
 
+    describe '#check_diagonal_right' do
+        subject(:game) { Game.new }
+
+        before do
+            game.board[2][6] = game.red
+            game.board[3][5] = game.red
+            game.board[4][4] = game.red
+            game.board[5][3] = game.red
+        end
+
+        context 'when it matches' do
+            it 'returns true' do
+                result = game.check_diagonal_right(2, 6, game.red)
+                expect(result).to be true
+            end
+        end
+    end
+
 end
