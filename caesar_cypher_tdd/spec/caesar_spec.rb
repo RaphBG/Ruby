@@ -35,4 +35,12 @@ describe CaesarCypher do
       end
     end
 
+    describe "#ascii2char" do
+    subject(:cypher) { CaesarCypher.new("Hello",1) }
+      it "Hello +1 in ascii is now in char" do
+        cypher.arr = [73,102,109,109,112]
+        expect(cypher.ascii2char).to eq(["I","f","m","m","p"])
+      end
+    end
+
 end

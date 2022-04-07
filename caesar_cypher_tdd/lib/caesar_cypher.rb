@@ -36,4 +36,10 @@ class CaesarCypher
         end
     end
 
+    def ascii2char
+        @arr.each_with_index do |letter,index|
+            @arr[index] = @arr[index].chr
+        end
+    end
+
 end
