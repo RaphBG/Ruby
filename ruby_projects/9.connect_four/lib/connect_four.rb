@@ -1,7 +1,9 @@
 class Game
-  attr_accessor :board, :yellow, :red
+  attr_accessor :board, :yellow, :red, :turn
   def initialize
     @board = Array.new(6) { Array.new(7) { "\u25cb" } }
+    @yellow = "\e[1;33m\u25cf\e[0m"
+    @red = "\e[31m\u25cf\e[0m"
     @turn = 1
   end
   
@@ -15,14 +17,14 @@ class Game
 
   def placing(column)
     index = empty_row?(column)
-    @board[index][column] = "X"
+    @board[index][column] = @turn.odd? ? @red : @yellow
   end
 
   def empty_row?(column)
     index=0
     while index != 5
       index+=1
-      if  @board[index][column] == "X"
+      if  @board[index][column] != "\u25cb"
         index-=1
         break
       end
@@ -45,4 +47,5 @@ class Game
   
 end
 
-# game = Game.new
+game = Game.new
+game.display

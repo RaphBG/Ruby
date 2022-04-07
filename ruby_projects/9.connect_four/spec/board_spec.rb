@@ -15,13 +15,13 @@ describe Game do
         end
 
         it "4 is returned when a token is placed" do
-            game.board[5][0]="X"
+            game.board[5][0] = game.red
             expect(game.empty_row?(0)).to eq(4)
         end
 
         it "3 is returned when two tokens are placed" do
-            game.board[5][0]="X"
-            game.board[4][0]="X"
+            game.board[5][0] = game.red
+            game.board[4][0] = game.yellow
             expect(game.empty_row?(0)).to eq(3)
         end
     end
@@ -30,20 +30,21 @@ describe Game do
         subject(:game) { Game.new }
         it "the token is placed at the last row of column 0" do
             game.placing(0)
-            expect(game.board[5][0]).to eq("X")
+            expect(game.board[5][0]).to eq(game.red)
         end
 
         it "the token is placed at the fourth row of column 0" do
             game.placing(0)
+            game.turn += 1
             game.placing(0)
-            expect(game.board[4][0]).to eq("X")
+            expect(game.board[4][0]).to eq(game.yellow)
         end
     end
 
     describe "#full?" do
         subject(:game) { Game.new }
         it "return true"do
-            game.board = Array.new(6) { Array.new(7) { "X" } }
+            game.board = Array.new(6) { Array.new(7) { game.red } }
             expect(game.full?).to eq true
         end
         it "return false"do
