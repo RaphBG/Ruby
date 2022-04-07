@@ -1,10 +1,30 @@
+require 'colorize'
+
 class Game
   attr_accessor :board, :red, :yellow, :turn
   def initialize
     @board = Array.new(6) { Array.new(7) { "\u25cb" } }
-    @yellow = "\e[1;33m\u25cf\e[0m"
-    @red = "\e[31m\u25cf\e[0m"
+    @yellow = "\u25cf".yellow
+    @red = "\u25cf".red
     @turn = 1
+  end
+
+  def play
+    while full? != true
+      display
+      puts "Turn ##{@turn}"
+      if @turn.odd?
+        puts "Turn of player "+"1".red 
+      else 
+        puts "Turn of player "+"2".yellow
+      end
+      choice = gets.to_i
+      placing(choice)
+      if win? == true
+        break
+      end
+      @turn+=1
+    end
   end
   
   def display
@@ -16,6 +36,8 @@ class Game
   end
 
   def placing(column)
+    problem(column)
+    full_column?(column)
     index = empty_row?(column)
     @board[index][column] = @turn.odd? ? @red : @yellow
   end
@@ -30,6 +52,14 @@ class Game
       end
     end
     index
+  end
+
+  def problem(column)
+    if !column.between?(0,6)
+      puts "Choose between 0 and 6"
+      sleep 1
+      play
+    end
   end
 
   def full?
@@ -48,6 +78,29 @@ class Game
     end
   end
 
+  def win?
+    6.times do |row|
+      7.times do |column|
+        symbol = @turn.odd? ? @red : @yellow
+        if check(row, column, symbol)
+          if @turn.odd?
+            display
+            puts "The player "+"1".red+" win !"
+            return true
+          else
+            display
+            puts "the player "+"2".yellow+" win !"
+            return true
+          end
+        end
+      end
+    end
+  end
+
+  def check(row, column, symbol)
+    check_row(row, column, symbol) || check_column(row, column, symbol) || check_diagonals(row, column, symbol)
+  end
+
   def check_row(row, column, symbol)
     return if column > 3
     @board[row][column]==symbol && @board[row][column+1]==symbol && @board[row][column+2]==symbol && @board[row][column+3]==symbol
@@ -62,5 +115,18 @@ class Game
     return if column < 3
     @board[row][column] == symbol && @board[row + 1][column - 1] == symbol && @board[row + 2][column - 2] == symbol && @board[row + 3][column - 3] == symbol
   end
+
+  def check_diagonal_left(row, column, symbol)
+    return if column > 3
+    @board[row][column] == symbol && @board[row + 1][column + 1] == symbol && @board[row + 2][column + 2] == symbol && @board[row + 3][column + 3] == symbol
+  end
+
+  def check_diagonals(row, column, symbol)
+    return unless row < 3
+    check_diagonal_right(row, column, symbol) || check_diagonal_left(row, column, symbol)
+  end
   
 end
+
+# game = Game.new
+# game.play

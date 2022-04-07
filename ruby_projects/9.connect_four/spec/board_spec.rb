@@ -106,4 +106,21 @@ describe Game do
         end
     end
 
+    describe '#check_diagonal_left' do
+        subject(:game) { Game.new }
+        before do
+            game.board[0][2] = game.red
+            game.board[1][3] = game.red
+            game.board[2][4] = game.red
+            game.board[3][5] = game.red
+        end
+
+        context 'when it matches' do
+            it 'returns true' do
+                result = game.check_diagonal_left(0, 2, game.red)
+                expect(result).to be true
+            end
+        end
+    end
+
 end
