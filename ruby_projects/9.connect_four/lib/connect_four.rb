@@ -11,5 +11,22 @@ class Game
     end
     puts grid
   end
+
+  def placing(column)
+    index = empty_row?(column)
+    @board[index][column] = "X"
+  end
+
+  def empty_row?(column)
+    index=0
+    while index != 5
+      index+=1
+      if  @board[index][column] != "\u25cb"
+        index-=1
+        break
+      end
+    end
+    index
+  end
   
 end
