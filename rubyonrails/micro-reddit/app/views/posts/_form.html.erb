@@ -1,32 +1,31 @@
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<div class="section">
+	<div class="container">
+    <div class="columns is-centered">
 
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+      <div class="column is-4">
+        <%= simple_form_for(post) do |f| %>
+          <%= f.error_notification %>
+
+          <div class="field">
+            <div class="control">
+              <%= f.input :title, placeholder: "Title", input_html: { class:"input" }, wrapper: false, label_html: { class:"label" } %>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <%= f.input :body, input_html: { class: "textarea" }, wrapper: false, label_html: { class: "label" } %>		
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <%= f.button :submit, "Done", class:"button is-info is-medium" %>
+            </div>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
+      </div>
+		</div>
+	</div>
+</div>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :resume, style: "display: block" %>
-    <%= form.text_field :resume %>
-  </div>
-
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
