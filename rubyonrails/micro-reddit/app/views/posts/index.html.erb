@@ -1,0 +1,35 @@
+<h1>Posts</h1>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <div class="content">
+      <div class="title-post">
+        <strong><%= post.title %></strong>
+      </div>
+      <div class="resume-post">
+        <strong><%= post.resume %></strong><br/>
+        <%= post.body %>
+      </div>
+      <div class="footer-post">
+        <% date = post.created_at + 2.hours%>
+        <div>
+          <%= date.to_fs(:long)%>
+        </div>
+        <div>
+          <%= link_to post do %>
+            <div class="icon"><i class='fa fa-search'></i></div>
+          <% end %>
+          <%= link_to post, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Really?" } do %>
+            <div class="icon"><i class='fa fa-trash'></i></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<p>
+  <%= link_to new_post_path do %>
+    <div class="icon"><i class='fa fa-plus' aria-hidden="true"></i></div>
+  <% end %>
+</p>

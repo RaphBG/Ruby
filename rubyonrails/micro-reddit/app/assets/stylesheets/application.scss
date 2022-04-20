@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+ @import "bulma";
+
+ .content{
+   border: solid 2px;
+   width: 25em;
+ }
+
+ .title-post{
+   font-size: 25px;
+  }
+
+ .resume-post{
+   border: solid 2px;
+ }
+
+ .footer-post{
+   display: flex;
+   justify-content: space-between
+ }
+
+.navbar-brand .title{
+	color: white;
+}
