@@ -1,14 +1,17 @@
-<%= render @post %>
+<div class="title-center"><%= @post.title %><br/></div>
+<div class="post-body"><%= @post.body %><br/></div>
+  
+<div class="comments">
+  <h2>Comments</h2>
+  <%= render @post.comments %><br/>
 
-<h2>Comments</h2>
-<%= render @post.comments %>
+  <% if user_signed_in? %>
+    <h2>Add a comment:</h2>
+    <%= render 'comments/form' %><br/>
+  <% end %>
+</div>
 
-<% if user_signed_in? %>
-  <h2>Add a comment:</h2>
-  <%= render 'comments/form' %>
-<% end %>
-
-<div>
+<div class="text-center">
   <% if user_signed_in? && current_user.id == @post.user_id %>
     <%= link_to "Edit this post", edit_post_path(@post) %> |
   <% end %>

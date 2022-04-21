@@ -3,7 +3,7 @@
   <%= comment.body %>
   <% if user_signed_in? && current_user.id == comment.user_id %>
     <%= link_to [comment.post, comment], method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-      <span class="icon"><i class='fa fa-trash'></i></span>
+      <span class="icon"><i class='fa fa-remove'></i></span>
     <% end %>
   <% end %>
 </p>
