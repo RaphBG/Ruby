@@ -7,13 +7,13 @@
         <strong><%= post.title %></strong>
       </div>
       <div class="resume-post">
+        <strong><%= post.resume %></strong><br/>
         <%= post.body %>
       </div>
         <div class="footer-post">
           <%= User.find(post.user_id).username%>
-          <% date = post.created_at + 2.hours%>
           <div>
-            <%= date.to_fs(:long)%>
+            <%= (post.created_at + 2.hours).to_fs(:long) %>
             <%= link_to post do %>
               <div class="icon"><i class='fa fa-search'></i></div>
             <% end %>
