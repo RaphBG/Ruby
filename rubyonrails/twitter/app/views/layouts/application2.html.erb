@@ -6,7 +6,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_importmap_tags %>
   </head>
 
   <body>
@@ -35,27 +34,25 @@
 			<div id="navbarExample" class="navbar-menu">
 				<div class="navbar-end">
           <div class="navbar-item">
-					  <div class="field is-grouped">
-						  <p class="control">
-							  <%= link_to 'New Tweet', root_path, class: "button is-info is-inverted" %>
-						  </p>
-
-							<% if user_signed_in?%>
-								<p class="control">
-              		<%= link_to current_user.name, edit_user_registration_path, class: "button is-info" %>
-            		</p>
-								<p class="control">
-              		<%= link_to 'Log out', destroy_user_session_url, method: :delete, class: "button is-info" %>
-            		</p>
-							<% else%>
-
-							<p class="control">
-              	<%= link_to 'Sign Up', new_user_registration_path, class: "button is-info" %>
-            	</p>
-							<p class="control">
-              	<%= link_to 'Sign In', new_user_session_path, class: "button is-info" %>
-            	</p>
-							<% end %>
+					<div class="field is-grouped">
+						<p class="control">
+							<%= link_to 'New Tweet', root_path, class: "button is-info is-inverted" %>
+						</p>
+            <% if user_signed_in? %>
+              <p class="control">
+                <%= link_to current_user.name, edit_user_registration_path, class: "button is-info" %>
+              </p>
+              <p>
+                <%= link_to "Logout", destroy_user_session_path, data: { "turbo-method": :delete , "turbo-confirm": "Are you sure?"}, class:"button is-info" %>
+              </p>
+            <% else %>
+            <p class="control">
+              <%= link_to 'Sign In', new_user_session_path, class: "button is-info" %>
+            </p>
+						<p class="control">
+              <%= link_to 'Sign Up', new_user_registration_path, class: "button is-info" %>
+            </p>
+            <% end %>
             </div>
 					</div>
 				</div>
