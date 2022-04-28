@@ -4,3 +4,7 @@
   </h1>
 <% end %>
 <%= render "search_form" %>
+
+<% if !@available_flights.nil? %>
+  <%= render "search_results" %>
+<% end %>
