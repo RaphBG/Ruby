@@ -1,0 +1,14 @@
+<% departure_airport = @selected_flight.departure_airport.code %>
+<% arrival_airport = @selected_flight.arrival_airport.code %>
+<% selected_date = @selected_flight.scheduled_on.strftime('%B %d, %Y') %>
+<% scheduled_time = @selected_flight.scheduled_on.strftime('%H:%M') %>
+<% arrival_time = (@selected_flight.scheduled_on + (@selected_flight.duration/60).to_i.hours).strftime('%H:%M') %>
+
+<h1 class="title">
+  Your trip summary
+</h1>
+<h2 class="subtitle">
+  <%= selected_date %> | <%= departure_airport %> - <%= arrival_airport %> | <%= scheduled_time %> - <%= arrival_time %>
+</h2>
+
+<%= render "new_booking_form" %>

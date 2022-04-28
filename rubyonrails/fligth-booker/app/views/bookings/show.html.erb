@@ -1,0 +1,33 @@
+The flight for the <%= @booking.flight.scheduled_on.strftime("%d/%m/%y at %H:%M") %><br/>
+<table>
+  <thead>
+    <tr>
+      <th>Departure</th>
+      <th>Arrival</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @booking.flight.departure_airport.name %> <%= @booking.flight.scheduled_on.strftime('%H:%M') %></td>
+      <td><%= @booking.flight.arrival_airport.name %> <%= (@booking.flight.scheduled_on + (@booking.flight.duration/60).to_i.hours).strftime('%H:%M') %></td>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @booking.passengers.each do |passenger| %>
+        <tr>
+          <td><%= passenger.name %></td>
+          <td><%= passenger.email %></td>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
+  
+<%= link_to 'Book more flights', root_path%>
