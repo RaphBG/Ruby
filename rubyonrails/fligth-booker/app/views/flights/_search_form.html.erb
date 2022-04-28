@@ -1,0 +1,13 @@
+<%= form_with(url: "/", method: "get", local: true) do %>
+
+  <%= select_tag(:from_airport_id, options_for_select(@airport_options, selected: params[:from_airport_id]), { prompt: 'From?' }) %>
+
+  <%= select_tag(:to_airport_id, options_for_select(@airport_options, selected: params[:to_airport_id]), { prompt: 'To?' }) %>
+
+  <%= select_tag(:passengers, options_for_select(1..4, selected: params[:passengers]), { prompt: 'Passengers' }) %>
+
+  <%= select_tag(:date, options_for_select(@date_options, selected: params[:date])) %>
+
+  <%= submit_tag("Show flights") %>
+
+<% end %>
