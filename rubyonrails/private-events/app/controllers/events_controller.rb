@@ -40,12 +40,11 @@ class EventsController < ApplicationController
 
   def destroy
     event = Event.find(params[:id])
-    event.destroy
     
-    if event.destroyed?
-      message= "Worked"
+    if event.destroy
+      message= "The event has been deleted"
     else
-      message= "Didn't worked"
+      message= "There is a problem. The event can't be deleted"
     end
     redirect_to root_path, notice: message
   end

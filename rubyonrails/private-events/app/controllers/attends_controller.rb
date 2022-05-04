@@ -7,12 +7,11 @@ class AttendsController < ApplicationController
 
   def destroy
     attend = current_user.attends.find_by(attended_event_id: params[:id])
-    attend.destroy
 
-    if attend.destroyed?
-      message= "Worked"
+    if attend.destroy
+      message= "The attend has been deleted"
     else
-      message= "Didn't worked"
+      message= "There is a problem. The attend can't be deleted"
     end
 
     redirect_to profile_path, notice: message
