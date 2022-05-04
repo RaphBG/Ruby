@@ -1,0 +1,28 @@
+<h1 class="title-center">Posts</h1>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <div class="content">
+      <div class="title-post">
+        <strong><%= post.title %></strong>
+      </div>
+      <div class="resume-post">
+        <%= post.body.truncate(25, separator: ' ') %>
+      </div>
+        <div class="footer-post">
+          <%= post.user.username%>
+          <div>
+            <%= (post.created_at + 2.hours).to_fs(:long) %>
+            <%= link_to post do %>
+              <div class="icon"><i class='fa fa-search'></i></div>
+            <% end %>
+            <% if user_signed_in? && current_user.id == post.user_id %>
+              <%= link_to post, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Really?" } do %>
+                <div class="icon"><i class='fa fa-trash'></i></div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+    </div>
+  <% end %>
+</div>
