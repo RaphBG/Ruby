@@ -1,30 +1,30 @@
-Events Created<br/>
+<p>Events Created</p>
 <% @events.each do |event| %>
-  <%= event.name %>
-  <%= event.location %>
-  <%= event.date %><br/>
-<% end %><br/>
+  <div>
+    <%= event.name %>
+    <%= event.location %>
+    <%= event.date %>
+  </div>
+<% end %>
 
-Attended Events<br/><br/>
-Future Events<br/>
-<% @attended_events.each do |event| %>
-  <% if event.date > Date.today %>
+<p>Attended Events</p>
+<p>Future Events</p>
+<% @attended_events.upcoming.each do |event| %>
+  <div>
     <%= event.name %>
     <%= event.location %>
     <%= event.date %>
     <%= event.creator.email %>
-    <%= link_to "cancel Attending", attend_destroy_path(event), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are You sure ?" }%><br/>
-  <% end %>
+    <%= link_to "cancel Attending", attend_destroy_path(event), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are You sure ?" }%>
+  </div>
 <% end %>
-<br/>
 
-Past Events<br/>
-<% @attended_events.each do |event| %>
-  <% if event.date < Date.today %>
+<p>Past Events</p>
+<% @attended_events.attended.each do |event| %>
+  <div>
     <%= event.name %>
     <%= event.location %>
     <%= event.date %>
-    <%= event.creator.email %><br/>
-  <% end %>
+    <%= event.creator.email %>
+  </div>
 <% end %>
-<br/>

@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def index
-    @future_events = Event.all.upcoming
-    @past_events = Event.all.attended
+    @future_events = Event.upcoming
+    @past_events = Event.attended
   end
 
   def show
@@ -39,10 +39,15 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
-    @event.destroy
-
-    redirect_to root_path, status: :see_other
+    event = Event.find(params[:id])
+    event.destroy
+    
+    if event.destroyed?
+      message= "Worked"
+    else
+      message= "Didn't worked"
+    end
+    redirect_to root_path, notice: message
   end
 
   private
