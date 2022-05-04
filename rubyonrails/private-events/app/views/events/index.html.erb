@@ -1,0 +1,31 @@
+<h1>Events</h1>
+<%= Date.today %><br/>
+
+Future Events<br/>
+<% @future_events.each do |event| %>
+  <%= event.name %>
+  <%= event.location %>
+  <%= event.date %>
+  <%= link_to "Show", event_path(event) %>
+  <% if user_signed_in? && current_user.id == event.user_id %>
+    <%= link_to "Edit", edit_event_path(event) %>
+    <%= link_to "Delete", event_path(event), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are You sure ?" } %>
+  <% end %><br/>
+<% end %><br/>
+
+Past Events<br/>
+<% @past_events.each do |event| %>
+  <%= event.name %>
+  <%= event.location %>
+  <%= event.date %>
+  <%= link_to "Show", event_path(event) %><br/>
+<% end %><br/>
+
+<% if !user_signed_in?%>
+  <%= link_to "Sign Up",new_user_registration_path %><br/>
+  <%= link_to "Log In",new_user_session_path  %><br/>
+<% else %>
+  <%= link_to 'Log out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %><br/>
+  <%= link_to current_user.email, profile_path(current_user) %><br/>
+  <%= link_to "New", new_event_path %><br/>
+<% end %>

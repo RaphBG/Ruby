@@ -1,0 +1,30 @@
+<p>Events Created</p>
+<% @events.each do |event| %>
+  <div>
+    <%= event.name %>
+    <%= event.location %>
+    <%= event.date %>
+  </div>
+<% end %>
+
+<p>Attended Events</p>
+<p>Future Events</p>
+<% @attended_events.upcoming.each do |event| %>
+  <div>
+    <%= event.name %>
+    <%= event.location %>
+    <%= event.date %>
+    <%= event.creator.email %>
+    <%= link_to "cancel Attending", attend_destroy_path(event), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are You sure ?" }%>
+  </div>
+<% end %>
+
+<p>Past Events</p>
+<% @attended_events.attended.each do |event| %>
+  <div>
+    <%= event.name %>
+    <%= event.location %>
+    <%= event.date %>
+    <%= event.creator.email %>
+  </div>
+<% end %>
