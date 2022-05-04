@@ -1,0 +1,19 @@
+<h1>Posts</h1>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <p>
+      <% if user_signed_in?%>
+        <strong><%= post.user.username %></strong>:
+      <% end %>
+      <%= post.body %>  
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New post", new_post_path %><br/><br/>
+<% if user_signed_in? %>
+  <%= link_to 'Log out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Really?" } %>
+<% else %>
+  <%= link_to 'Sign in', new_user_registration_path %>
+<% end %>
