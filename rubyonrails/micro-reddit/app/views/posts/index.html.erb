@@ -10,7 +10,7 @@
         <%= post.body.truncate(25, separator: ' ') %>
       </div>
         <div class="footer-post">
-          <%= User.find(post.user_id).username%>
+          <%= post.user.username%>
           <div>
             <%= (post.created_at + 2.hours).to_fs(:long) %>
             <%= link_to post do %>
