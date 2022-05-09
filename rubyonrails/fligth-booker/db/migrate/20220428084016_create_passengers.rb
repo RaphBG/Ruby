@@ -3,9 +3,9 @@ class CreatePassengers < ActiveRecord::Migration[7.0]
     create_table :passengers do |t|
       t.string :name
       t.string :email
+      t.references :booking, foreign_key: true
 
       t.timestamps
     end
-    add_reference :passengers, :booking, foreign_key: true
   end
 end

@@ -5,6 +5,6 @@
 <% end %>
 <%= render "search_form" %>
 
-<% if !@available_flights.nil? %>
+<% if @available_flights.present? %>
   <%= render "search_results" %>
 <% end %>
