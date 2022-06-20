@@ -3,28 +3,28 @@
 # Please see the documentation for all configuration options
 # httpshelp.github.comgithubadministering-a-repositoryconfiguration-options-for-dependency-updates
 
-version 2
-updates
-  - package-ecosystem bundler # See documentation for possible values
-    directory  # Location of package manifests
-    schedule
-      interval daily
-    open-pull-requests-limit 10
-    versioning-strategy lockfile-only
-    ignore
-      - dependency-name 
-        update-types [version-updatesemver-major, version-updatesemver-minor]
+version: 2
+updates:
+  - package-ecosystem: "bundler" # See documentation for possible values
+    directory:  # Location of package manifests
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    versioning-strategy: lockfile-only
+    ignore:
+      - dependency-name:
+        update-types: ["version-updatesemver-major", "version-updatesemver-minor"]
     reviewers:
       - "RaphBG"
 
-  - package-ecosystem npm # See documentation for possible values
-    directory  # Location of package manifests
-    schedule
-      interval daily
-    open-pull-requests-limit 10
-    versioning-strategy lockfile-only
-    ignore
-      - dependency-name 
-        update-types [version-updatesemver-major, version-updatesemver-minor]
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory:  # Location of package manifests
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    versioning-strategy: lockfile-only
+    ignore:
+      - dependency-name: 
+        update-types: ["version-updatesemver-major", "version-updatesemver-minor"]
     reviewers:
       - "RaphBG"
