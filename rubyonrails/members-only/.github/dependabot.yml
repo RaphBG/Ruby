@@ -14,6 +14,10 @@ updates
     ignore
       - dependency-name 
         update-types [version-updatesemver-major, version-updatesemver-minor]
+    reviewers:
+      - "octocat"
+      - "my-username"
+      - "my-org/python-team"
 
   - package-ecosystem npm # See documentation for possible values
     directory  # Location of package manifests
@@ -24,3 +28,7 @@ updates
     ignore
       - dependency-name 
         update-types [version-updatesemver-major, version-updatesemver-minor]
+    reviewers:
+      - "octocat"
+      - "my-username"
+      - "my-org/python-team"
